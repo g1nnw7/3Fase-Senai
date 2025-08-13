@@ -1,12 +1,31 @@
-const { PrismaClient } = require("@prisma/client");
-
+import {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.usuario.createMany({
     data: [
-      { nome:"Joao",
-        email: "joao343@email.com", 
+      { nome:"Joao", 
+        email: "joao34@email.com", 
+        senha: "123",
+        cargo: "Médico"
+      },
+      { nome:"Mathias", 
+        email: "mathias@gmail.com", 
+        senha: "123",
+        cargo: "Médico"
+      },
+      { nome:"Ygor", 
+        email: "ygor@gmail.com", 
+        senha: "123",
+        cargo: "Médico"
+      },
+      { nome:"Dourado", 
+        email: "dourado@gmail.com", 
+        senha: "123",
+        cargo: "Médico"
+      },
+      { nome:"Andrei", 
+        email: "andrei@gmail.com", 
         senha: "123",
         cargo: "Médico"
       },
@@ -15,32 +34,33 @@ async function main() {
 
   await prisma.paciente.create({
     data: {
-      nome: "JoÃo",
+      nome: "João",
       sexo: "Masculino",
       data_nascimento: new Date("1980-12-11"),
       cpf: "958.521.251.65",
-      telefone: 48999022880,
+      telefone: 952556232,
       email: "joao@email.com",
-    //   consulta: {
-    //     create: [
-    //       {
-    //         motivo: "Dor nas costas",
-    //         data_consulta: new Date("2023-08-25"),
-    //         observacoes: "Ibuprofeno 3 vezes ao dia",
-    //       }
-    //     ]
-    //   },
-    //   exame: {
-    //     create: [
-    //       {
-    //         tipo: "Densiometro",
-    //         data_exame: new Date("2023-08-25"),
-    //         resultado: "deu ruim",
-    //         link_arquivo: "url.com.br/exame.pdf",
-    //         observacoes: ""
-    //       }
-    //     ]
-    //   }
+      // Consulta: {
+      //   create: [
+      //     {
+      //       motivo: "Dor nas costas",
+      //       data_consulta: new Date("2023-08-25"),
+      //       observacoes: "Ibuprofeno 3 vezes ao dia",
+      //       medico_responsavel_id: 
+      //     }
+      //   ]
+      // },
+      // Exame: {
+      //   create: [
+      //     {
+      //       tipo: "Densiometro",
+      //       data_exame: new Date("2023-08-25"),
+      //       resultado: "deu ruim",
+      //       link_arquivo: "url.com.br/exame.pdf",
+      //       observacoes: ""
+      //     }
+      //   ]
+      // }
     },
   });
 }
@@ -52,3 +72,4 @@ main()
     prisma.$disconnect();
     process.exit(1);
   });
+
