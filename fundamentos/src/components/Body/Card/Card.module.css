@@ -1,3 +1,10 @@
+.cardContainerApi{
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+
 .card{
     background-color: white;
     border: 1px solid #ddd;
