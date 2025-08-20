@@ -61,36 +61,38 @@ app.post("/usuarios", async(req, res)=> {
   })
 
   app.put("/usuarios/:id", async(req, res)=>{
-    
     try {
       const { body, params } = req
-
-      if(body.nome || body.cargo || body.email || body.senha){
-      await prismaClient.usuario.update({
-        where: { id: Number(params.id) },
-        data: { 
-          ...body
-         },
-      })
-      else{
-        res.status(404).send("Atributos enviados não condizem com schema!")
-      }
-      const usuarioAtualizado = await prismaClient.usuario.findUnique({
-        where: {
-          id: Number(params.id)
-        }
-      })
   
-      res.status(201).json({
-        message: "Usuário atualizado!",
-        data: usuarioAtualizado
-      })}
-      
+      if(body.nome || body.cargo || body.email || body.senha){
+        await prismaClient.usuario.update({
+          where: { id: Number(params.id) },
+          data: { 
+            ...body
+           },
+        })
+        
+        const usuarioAtualizado = await prismaClient.usuario.findUnique({
+          where: {
+            id: Number(params.id)
+          }
+        })
+    
+        res.status(201).json({
+          message: "Usuário atualizado!",
+          data: usuarioAtualizado
+        })
+      } else {
+        res.status(404).send("Atributos enviados não condizem com o schema")
+      }
+       
     } catch (error) {
-        if(error.code = "P2025"){
-            res.status(404).send("Usuário não existe no banco")
-        }
-      console.log(error)
+      if(error.code == "P2025"){
+        res.status(404).send("Usuário não existe no banco")
+      }
+      if(error.code === "P2002"){
+        res.status(404).send("Falha ao cadastrar usuário: Email já cadastrado!")
+      }
     }
   })
 
