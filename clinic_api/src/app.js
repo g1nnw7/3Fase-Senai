@@ -71,7 +71,7 @@ app.post("/usuarios", async(req, res)=> {
         data: { 
           ...body
          },
-      })}
+      })
       else{
         res.status(404).send("Atributos enviados não condizem com schema!")
       }
@@ -84,7 +84,7 @@ app.post("/usuarios", async(req, res)=> {
       res.status(201).json({
         message: "Usuário atualizado!",
         data: usuarioAtualizado
-      })
+      })}
       
     } catch (error) {
         if(error.code = "P2025"){
