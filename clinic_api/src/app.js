@@ -40,6 +40,58 @@ app.get("/usuarios/:id", async (request, response) => {
             console.log(e)
     }
 })
+app.post("/usuarios", async(req, res)=> {
+    try {
+      const { body } = req
+      const usuario = await prismaClient.usuario.create({
+        data: {
+          nome: body.nome,
+          cargo: body.cargo,
+          email: body.email,
+          senha: body.senha
+        },
+      })
+      return res.status(201).send(usuario)
+    } catch (error) {
+      console.error(error)
+      if(error.code === "P2002"){
+        res.status(404).send("Falha ao cadastrar usuário: Email já cadastrado!")
+      }
+    }
+  })
 
+  app.put("/usuarios/:id", async(req, res)=>{
+    
+    try {
+      const { body, params } = req
+
+      if(body.nome || body.cargo || body.email || body.senha){
+      await prismaClient.usuario.update({
+        where: { id: Number(params.id) },
+        data: { 
+          ...body
+         },
+      })}
+      else{
+        res.status(404).send("Atributos enviados não condizem com schema!")
+      }
+      const usuarioAtualizado = await prismaClient.usuario.findUnique({
+        where: {
+          id: Number(params.id)
+        }
+      })
+  
+      res.status(201).json({
+        message: "Usuário atualizado!",
+        data: usuarioAtualizado
+      })
+      
+    } catch (error) {
+        if(error.code = "P2025"){
+            res.status(404).send("Usuário não existe no banco")
+        }
+      console.log(error)
+    }
+  })
 
 app.listen(3000, ()=> console.log("Api rodando"))
