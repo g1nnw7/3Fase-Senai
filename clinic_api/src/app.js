@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import { prismaClient } from '../prisma/prisma.js';
 
 const app = express()
@@ -13,32 +13,22 @@ app.get('/usuarios', async (request, response) => {
     console.log(e)
   }
 });
+
 app.get("/usuarios/:id", async (request, response) => {
   try {
-    const id = Number(request.params.id);
-
-    if (isNaN(id)) {
-      return response.status(400).json({ error: "ID inválido" });
-    }
-
     const usuario = await prismaClient.usuario.findUnique({
       where: {
         id: Number(request.params.id)
       }
     })
-
-    if (!usuario) {
-      return response.status(404).send("Usuário não encontrado");
-    }
-
+    if (!usuario) return response.status(404).send("Usuário não existe!")
     return response.json(usuario)
-
-
   }
   catch (e) {
     console.log(e)
   }
 })
+
 app.post("/usuarios", async (req, res) => {
   try {
     const { body } = req
@@ -50,7 +40,7 @@ app.post("/usuarios", async (req, res) => {
         senha: body.senha
       },
     })
-    return res.status(201).send(usuario)
+    return res.status(201).json(usuario)
   } catch (error) {
     console.error(error)
     if (error.code === "P2002") {
@@ -58,10 +48,10 @@ app.post("/usuarios", async (req, res) => {
     }
   }
 })
+
 app.put("/usuarios/:id", async (req, res) => {
   try {
     const { body, params } = req
-
     if (body.nome || body.cargo || body.email || body.senha) {
       await prismaClient.usuario.update({
         where: { id: Number(params.id) },
@@ -83,7 +73,6 @@ app.put("/usuarios/:id", async (req, res) => {
     } else {
       res.status(404).send("Atributos enviados não condizem com o schema")
     }
-
   } catch (error) {
     if (error.code == "P2025") {
       res.status(404).send("Usuário não existe no banco")
@@ -93,6 +82,7 @@ app.put("/usuarios/:id", async (req, res) => {
     }
   }
 })
+
 app.delete("/usuarios/:id", async (req, res) => {
   const { params } = req
   try {
@@ -106,92 +96,98 @@ app.delete("/usuarios/:id", async (req, res) => {
       data: usuarioDeletado
     })
   } catch (error) {
-    console.log(error)
+    if (error.code == "P2025") {
+      res.status(404).send("Usuário não existe no banco")
+    }
   }
 })
-app.get('/pacientes', async (req, res) => {
+
+// Pacientes
+app.get('/pacientes', async (request, response) => {
   try {
     const pacientes = await prismaClient.paciente.findMany();
-    return res.json(pacientes)
+    return response.json(pacientes)
   }
   catch (e) {
     console.log(e)
   }
-})
+});
+
 app.get("/pacientes/:id", async (request, response) => {
   try {
-    const id = Number(request.params.id);
-
-    if (isNaN(id)) {
-      return response.status(400).json({ error: "ID inválido" });
-    }
-
-    const paciente = await prismaClient.paciente.findUnique({
+    const pacientes = await prismaClient.paciente.findUnique({
       where: {
         id: Number(request.params.id)
       }
     })
-
-    if (!paciente) {
-      return response.status(404).send("Usuário não encontrado");
-    }
-
-    return response.json(paciente)
-
-
+    if (!pacientes) return response.status(404).send("Paciente não existe!")
+    return response.json(pacientes)
   }
   catch (e) {
     console.log(e)
   }
 })
-app.post('/pacientes', async (req, res) => {
+
+app.post("/pacientes", async (req, res) => {
   try {
     const { body } = req
-    console.log(body)
-    const paciente = await prismaClient.paciente.create({
+    const bodyKeys = Object.keys(body) // Aqui pegamos todas as chaves do objeto e é gerado um array de strings para a gente, com o formato de ["chave1", "chave2".....]
+    console.log(bodyKeys)
+    for (const key of bodyKeys) {
+      if (key !== "nome" &&
+        key !== "cpf" &&
+        key !== "telefone" &&
+        key !== "email" &&
+        key !== "data_nascimento" &&
+        key !== "sexo" &&
+        key !== "responsavel"
+      ) return res.status(404).send("Colunas não existentes")
+    }
+    const pacientes = await prismaClient.paciente.create({
       data: {
-        nome: body.nome,
-        cpf: body.cpf,
-        telefone: body.telefone,
-        email: body.email,
+        ...body,
         data_nascimento: new Date(body.data_nascimento),
-        sexo: body.sexo
       },
     })
-    return res.status(201).send(paciente)
-  }
-  catch (e) {
-    console.log(e)
+    return res.status(201).json(pacientes)
+  } catch (error) {
+    console.error(error)
     if (error.code === "P2002") {
-      res.status(404).send("Falha ao cadastrar paciente: paciente já cadastrado!")
+      res.status(404).send("Falha ao cadastrar paciente: Email já cadastrado!")
     }
   }
 })
+
 app.put("/pacientes/:id", async (req, res) => {
   try {
     const { body, params } = req
-
-    if (body.nome || body.cpf || body.telefone || body.email || body.data_nascimento || body.sexo) {
-      await prismaClient.paciente.update({
-        where: { id: Number(params.id) },
-        data: {
-          ...body
-        },
-      })
-
-      const pacienteAtualizado = await prismaClient.paciente.findUnique({
-        where: {
-          id: Number(params.id)
-        }
-      })
-
-      res.status(201).json({
-        message: "Usuário atualizado!",
-        data: pacienteAtualizado
-      })
-    } else {
-      res.status(404).send("Atributos enviados não condizem com o schema")
+    const bodyKeys = Object.keys(body)
+    for (const key of bodyKeys) {
+      if (key !== "nome" &&
+        key !== "cpf" &&
+        key !== "telefone" &&
+        key !== "email" &&
+        key !== "data_nascimento" &&
+        key !== "sexo" &&
+        key !== "responsavel"
+      ) return res.status(404).send("Colunas não existentes")
     }
+    await prismaClient.paciente.update({
+      where: { id: Number(params.id) },
+      data: {
+        ...body
+      },
+    })
+    const pacienteAtualizado = await prismaClient.paciente.findUnique({
+      where: {
+        id: Number(params.id)
+      }
+    })
+
+    return res.status(201).json({
+      message: "Paciente atualizado!",
+      data: pacienteAtualizado
+    })
 
   } catch (error) {
     if (error.code == "P2025") {
@@ -202,6 +198,7 @@ app.put("/pacientes/:id", async (req, res) => {
     }
   }
 })
+
 app.delete("/pacientes/:id", async (req, res) => {
   const { params } = req
   try {
@@ -211,106 +208,116 @@ app.delete("/pacientes/:id", async (req, res) => {
       },
     })
     res.status(200).json({
-      message: "Usuário deletado!",
+      message: "Paciente deletado!",
       data: pacienteDeletado
     })
   } catch (error) {
-    console.log(error)
+    if (error.code == "P2025") {
+      res.status(404).send("Paciente não existe no banco")
+    }
+    if (error.code == "P2003") {
+      res.status(404).send("Paciente não pode ser excluido, pois possui exames vinculados.")
+    }
+    res.status(500).send(error)
   }
 })
-app.get('/exames', async (req, res) => {
+
+
+//Exame
+app.get('/exames', async (request, response) => {
   try {
     const exames = await prismaClient.exame.findMany();
-    return res.json(exames)
+    return response.json(exames)
   }
   catch (e) {
     console.log(e)
   }
-})
+});
+
 app.get("/exames/:id", async (request, response) => {
   try {
-    const id = Number(request.params.id);
-
-    if (isNaN(id)) {
-      return response.status(400).json({ error: "ID inválido" });
-    }
-
-    const exame = await prismaClient.exame.findUnique({
+    const exames = await prismaClient.exame.findUnique({
       where: {
         id: Number(request.params.id)
       }
     })
-
-    if (!exame) {
-      return response.status(404).send("Usuário não encontrado");
-    }
-
-    return response.json(exame)
-
-
+    if (!exames) return response.status(404).send("Exame não existe!")
+    return response.json(exames)
   }
   catch (e) {
     console.log(e)
   }
 })
-app.post('/exames', async (req, res) => {
+
+app.post("/exames", async (req, res) => {
   try {
     const { body } = req
-    console.log(body)
-    const exame = await prismaClient.exame.create({
+    const bodyKeys = Object.keys(body)
+    for (const key of bodyKeys) {
+      if (key !== "tipo_exame" &&
+        key !== "resultado" &&
+        key !== "data_exame" &&
+        key !== "link_arquivo" &&
+        key !== "observacoes" &&
+        key !== "paciente_id" 
+      ) return res.status(404).send("Colunas não existentes")
+    }
+    const exames = await prismaClient.exame.create({
       data: {
-        tipo_exame: body.tipo_exame,
-        resultado: body.resultado,
-        data_exame: new Date(body.data_exame),
-        link_arquivo: body.link_arquivo,
-        observacoes: body.observacoes,
-        paciente_id: body.paciente_id
+        ...body,
+        data_exame: new Date(body.data_exame)
       },
     })
-    return res.status(201).send(exame)
-  }
-  catch (e) {
-    console.log(e)
-    if (e.code === "P2002") {
-      res.status(404).send("Falha ao cadastrar exame: exame já cadastrado!")
+    return res.status(201).json(exames)
+  } catch (error) {
+    console.error(error)
+    if (error.code === "P2002") {
+      res.status(404).send("Falha ao cadastrar paciente: Email já cadastrado!")
     }
   }
 })
+
 app.put("/exames/:id", async (req, res) => {
   try {
     const { body, params } = req
-
-    if (body.tipo_exame || body.resultado || body.data_exame || body.link_arquivo || body.observacoes) {
-      await prismaClient.exame.update({
-        where: { id: Number(params.id) },
-        data: {
-          ...body
-        },
-      })
-
-      const exameAtualizado = await prismaClient.exame.findUnique({
-        where: {
-          id: Number(params.id)
-        }
-      })
-
-      res.status(201).json({
-        message: "Usuário atualizado!",
-        data: exameAtualizado
-      })
-    } else {
-      res.status(404).send("Atributos enviados não condizem com o schema")
+    const bodyKeys = Object.keys(body)
+    for (const key of bodyKeys) {
+      if (key !== "tipo_exame" &&
+        key !== "resultado" &&
+        key !== "data_exame" &&
+        key !== "link_arquivo" &&
+        key !== "observacoes" &&
+        key !== "paciente_id" 
+      ) return res.status(404).send("Colunas não existentes")
     }
+    await prismaClient.exame.update({
+      where: { id: Number(params.id) },
+      data: {
+        ...body
+      },
+    })
+    const exameAtualizado = await prismaClient.exame.findUnique({
+      where: {
+        id: Number(params.id)
+      }
+    })
+
+    return res.status(201).json({
+      message: "Paciente atualizado!",
+      data: exameAtualizado
+    })
 
   } catch (error) {
     if (error.code == "P2025") {
       res.status(404).send("Usuário não existe no banco")
     }
+   
     if (error.code === "P2002") {
       res.status(404).send("Falha ao cadastrar usuário: Email já cadastrado!")
     }
   }
 })
+
 app.delete("/exames/:id", async (req, res) => {
   const { params } = req
   try {
@@ -320,14 +327,15 @@ app.delete("/exames/:id", async (req, res) => {
       },
     })
     res.status(200).json({
-      message: "Usuário deletado!",
+      message: "Exame deletado!",
       data: exameDeletado
     })
   } catch (error) {
-    console.log(error)
+    if (error.code == "P2025") {
+      res.status(404).send("Paciente não existe no banco")
+    }
   }
 })
-app.listen(3000, () => console.log("Api rodando"))
 
 
-
+app.listen(3000, () => console.log("Api rodandos"))

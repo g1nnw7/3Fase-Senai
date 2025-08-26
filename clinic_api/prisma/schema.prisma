@@ -47,7 +47,7 @@ model Paciente {
   id              Int          @id @default(autoincrement())
   nome            String
   cpf             String
-  telefone        Int
+  telefone        BigInt
   email           String
   data_nascimento DateTime
   sexo            String

@@ -9,26 +9,6 @@ async function main() {
         senha: "123",
         cargo: "Médico"
       },
-      { nome:"Mathias", 
-        email: "mathias@gmail.com", 
-        senha: "123",
-        cargo: "Médico"
-      },
-      { nome:"Ygor", 
-        email: "ygor@gmail.com", 
-        senha: "123",
-        cargo: "Médico"
-      },
-      { nome:"Dourado", 
-        email: "dourado@gmail.com", 
-        senha: "123",
-        cargo: "Médico"
-      },
-      { nome:"Andrei", 
-        email: "andrei@gmail.com", 
-        senha: "123",
-        cargo: "Médico"
-      },
     ],
   });
 
