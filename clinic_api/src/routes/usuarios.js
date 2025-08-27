@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { prismaClient } from "../prisma/prisma.js";
+import { prismaClient } from "../../prisma/prisma.js";
 export const usuarioRouter = Router()
 
 usuarioRouter.get('/usuarios', async (request, response) => {

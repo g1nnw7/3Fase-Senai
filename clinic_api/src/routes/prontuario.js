@@ -1,4 +1,5 @@
-import { prismaClient } from "../prisma/prisma.js";
+import { Router } from "express";
+import { prismaClient } from "../../prisma/prisma.js";
 
 export const prontuarioRouter = Router();
 // Prontuario
@@ -47,9 +48,6 @@ prontuarioRouter.post("/prontuarios", async (req, res) => {
         return res.status(201).json(prontuarios)
     } catch (error) {
         console.error(error)
-        if (error.code === "P2002") {
-            res.status(404).send("Falha ao cadastrar paciente: Email já cadastrado!")
-        }
     }
 })
 
@@ -83,11 +81,7 @@ prontuarioRouter.put("/prontuarios/:id", async (req, res) => {
 
     } catch (error) {
         if (error.code == "P2025") {
-            res.status(404).send("Usuário não existe no banco")
-        }
-
-        if (error.code === "P2002") {
-            res.status(404).send("Falha ao cadastrar usuário: Email já cadastrado!")
+            res.status(404).send("Prontuario não existe no banco")
         }
     }
 })
@@ -101,12 +95,12 @@ prontuarioRouter.delete("/prontuarios/:id", async (req, res) => {
             },
         })
         res.status(200).json({
-            message: "Exame deletado!",
+            message: "Prontuario deletado!",
             data: prontuarioDeletado
         })
     } catch (error) {
         if (error.code == "P2025") {
-            res.status(404).send("Paciente não existe no banco")
+            res.status(404).send("Prontuario não existe no banco")
         }
     }
 })

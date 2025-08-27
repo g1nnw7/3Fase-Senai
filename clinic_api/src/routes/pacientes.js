@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { prismaClient } from "../prisma/prisma";
+import { prismaClient } from "../../prisma/prisma.js";
 
 export const pacientesRouter = Router()
 
