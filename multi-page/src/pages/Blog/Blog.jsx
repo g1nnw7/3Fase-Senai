@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 const Blog = () => {
+  const [posts, setposts] = useState([])
+
+  useEffect(()=>{
+    fetch('')
+  })
   return (
     <>
 
