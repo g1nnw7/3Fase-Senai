@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@layer components{
+    .card{
+        box-shadow: 3px 3px 5px #333;
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+        padding: 10px;
+    }
+}
