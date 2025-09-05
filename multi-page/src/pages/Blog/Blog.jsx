@@ -18,8 +18,9 @@ const Blog = () => {
         {
           posts && posts.map(post =>(
             <div key={post.id} className='card'>
+              <img src={post.image} />
               <h2>{post.title}</h2>
-              <p>{post.views}</p>
+              <p>Views: {post.views}</p>
               
             </div>
           ))
