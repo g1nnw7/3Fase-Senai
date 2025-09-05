@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 
 const Blog = () => {
-  const [posts, setposts] = useState([])
+  const [posts, setPosts] = useState([])
 
   useEffect(()=>{
-    fetch('')
+    fetch('http://localhost:3000/posts')
+    .then(res => res.json())
+    .then(data => {
+      setPosts(data)
+    })
   })
+
   return (
     <>
 
