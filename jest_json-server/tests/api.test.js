@@ -85,6 +85,7 @@ test("PATCH /users/1 atualiza email", async () => {
         body: JSON.stringify({ email: "novoemail@example.com" }),
     });
     const data = await res.json();
+    console.log(data)
     expect(data.email).toBe("novoemail@example.com");
 });
 
