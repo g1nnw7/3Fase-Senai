@@ -39,7 +39,7 @@ test("GET /users retorna um array", async () => {
 // Exercício 3: POST cria usuário
 // -----------------------------
 test("POST /users cria usuário", async () => {
-    const novoUsuario = { name: "Ana", email: "ana@example.com" };
+    const novoUsuario = { id: 1, name: "Ana", email: "ana@example.com" };
     const res = await fetch(`${baseUrl}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -118,7 +118,9 @@ test("POST cria usuário e lista não está vazia", async () => {
     });
     const res = await fetch(`${baseUrl}/users`);
     const data = await res.json();
+    await fetch(`${baseUrl}/users/6`, { method: "DELETE" });
     expect(data.length).toBeGreaterThan(0);
+
 });
 
 // -----------------------------
