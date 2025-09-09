@@ -39,7 +39,7 @@ test("GET /users retorna um array", async () => {
 // Exercício 3: POST cria usuário
 // -----------------------------
 test("POST /users cria usuário", async () => {
-    const novoUsuario = { id: 1, name: "Ana", email: "ana@example.com" };
+    const novoUsuario = { id: 6, name: "Ana", email: "ana@example.com" };
     const res = await fetch(`${baseUrl}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,21 +52,21 @@ test("POST /users cria usuário", async () => {
 // -----------------------------
 // Exercício 4: GET usuário específico
 // -----------------------------
-test("GET /users/1 retorna usuário válido", async () => {
-    const res = await fetch(`${baseUrl}/users/1`);
+test("GET /users/6 retorna usuário válido", async () => {
+    const res = await fetch(`${baseUrl}/users/6`);
     const data = await res.json();
-    expect(data).toHaveProperty("id", 1);
+    expect(data).toHaveProperty("id", 6);
 });
 
 // -----------------------------
 // Exercício 5: PUT atualiza usuário
 // -----------------------------
-test("PUT /users/1 atualiza nome do usuário", async () => {
-    const res = await fetch(`${baseUrl}/users/1`, {
+test("PUT /users/6 atualiza nome do usuário", async () => {
+    const res = await fetch(`${baseUrl}/users/6`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            id: 1,
+            id: 6,
             name: "Thiago Atualizado",
             email: "thiago@example.com",
         }),
@@ -78,8 +78,8 @@ test("PUT /users/1 atualiza nome do usuário", async () => {
 // -----------------------------
 // Exercício 6: PATCH atualiza parcialmente
 // -----------------------------
-test("PATCH /users/1 atualiza email", async () => {
-    const res = await fetch(`${baseUrl}/users/1`, {
+test("PATCH /users/6 atualiza email", async () => {
+    const res = await fetch(`${baseUrl}/users/6`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: "novoemail@example.com" }),
@@ -92,9 +92,9 @@ test("PATCH /users/1 atualiza email", async () => {
 // -----------------------------
 // Exercício 7: DELETE usuário
 // -----------------------------
-test("DELETE /users/1 exclui usuário", async () => {
-    await fetch(`${baseUrl}/users/1`, { method: "DELETE" });
-    const res = await fetch(`${baseUrl}/users/1`);
+test("DELETE /users/6 exclui usuário", async () => {
+    await fetch(`${baseUrl}/users/6`, { method: "DELETE" });
+    const res = await fetch(`${baseUrl}/users/6`);
     expect(res.status).toBe(404);
 });
 
@@ -109,7 +109,7 @@ test("GET /users/999 retorna 404", async () => {
 // -----------------------------
 // Exercício 9: Lista não vazia
 // -----------------------------
-test("POST cria usuário e lista não está vazia", async () => {
+test("POST cria usuário e lista não está vazia, dps exclui", async () => {
     const novoUsuario = { name: "Carlos", email: "carlos@example.com" };
     await fetch(`${baseUrl}/users`, {
         method: "POST",
