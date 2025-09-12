@@ -3,7 +3,7 @@ import { useParams } from "react-router"
 
 const PostDetail = () => {
     const { id } = useParams()
-    const [post, setPost] = useState(null)
+    const [post, setPost] = useState("")
 
     useEffect(() => {
         fetch(`http://localhost:3000/posts/${id}`)
@@ -14,7 +14,7 @@ const PostDetail = () => {
         <div className="p-4">
             <h1 className="text-xl font-bold">{post.title}</h1>
             <p>{post.views}</p>
-        </dgitiv>
+        </div>
     )
 }
 export default PostDetail
