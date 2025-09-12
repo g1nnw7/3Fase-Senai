@@ -18,6 +18,12 @@ afterAll((done) => {
     server.close(done);
 });
 
+test("GET /users pelo nome", async () => {
+    const res = await fetch(`${baseUrl}/users?name=Mathias`);
+    const data = await res.json();
+    expect(data[0].name).toBe("Mathias");
+});
+
 // -----------------------------
 // Exercício 1: GET básico
 // -----------------------------

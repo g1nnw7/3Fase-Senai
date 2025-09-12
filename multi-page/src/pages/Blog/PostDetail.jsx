@@ -14,7 +14,7 @@ const PostDetail = () => {
         <div className="p-4">
             <h1 className="text-xl font-bold">{post.title}</h1>
             <p>{post.views}</p>
-        </div>
+        </dgitiv>
     )
 }
 export default PostDetail
