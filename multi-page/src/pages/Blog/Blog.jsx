@@ -17,7 +17,7 @@ const Blog = () => {
       <div className='flex gap-2'>
         {
           posts && posts.map(post =>(
-            <div key={post.id} className='card'>
+            <div key={post.id} className='card p-7 items-center'>
               <img src={post.image}/>
               <h2>{post.title}</h2>
               <p>Views: {post.views}</p>
