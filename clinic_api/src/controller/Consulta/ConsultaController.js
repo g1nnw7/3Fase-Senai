@@ -1,8 +1,10 @@
+import { Router } from "express";
 import { prismaClient } from "../../../prisma/prisma.js";
 
 class ConsultaController {
     constructor() { }
-    async getTodosOsConsultas(_, res) {
+
+    async pegarTodasConsultas(_, res) {
         try {
             const consultas = await prismaClient.consulta.findMany();
             return res.json(consultas)
@@ -12,16 +14,15 @@ class ConsultaController {
         }
     }
 
-    async getConsultaPorId(req, res) {
+    async pegarConsultaPorId(req, res) {
         try {
-            const { params } = req
-            const consulta = await prismaClient.consulta.findUnique({
+            const consultas = await prismaClient.consulta.findUnique({
                 where: {
-                    id: Number(params.id)
+                    id: Number(req.params.id)
                 }
             })
-            if (!consulta) return res.status(404).send("consulta não existe!")
-            return res.json(consulta)
+            if (!consultas) return res.status(404).send("Consulta não existe!")
+            return res.json(consultas)
         }
         catch (e) {
             console.log(e)
@@ -31,56 +32,64 @@ class ConsultaController {
     async criarConsulta(req, res) {
         try {
             const { body } = req
-            const consulta = await prismaClient.consulta.create({
+            const bodyKeys = Object.keys(body)
+            for (const key of bodyKeys) {
+                if (key !== "motivo" &&
+                    key !== "data_consulta" &&
+                    key !== "observacoes" &&
+                    key !== "medico_responsavel_id" &&
+                    key !== "paciente_id"
+                ) return res.status(404).send("Colunas não existentes")
+            }
+            const consultas = await prismaClient.consulta.create({
                 data: {
-                    motivo: body.motivo,
-                    data_consulta: new Date (body.data_consulta),
-                    observacoes: body.observacoes,
-                    medico_responsavel_id: body.medico_responsavel_id,
-                    paciente_id: body.paciente_id
+                    ...body,
+                    data_consulta: new Date(body.data_consulta) // corrigir esse cara no put quando nao se manda ele... TO-DO
                 },
             })
-            return res.status(201).json(consulta)
+            return res.status(201).json(consultas)
         } catch (error) {
             console.error(error)
-            if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar consulta: Email já cadastrado!")
-            }
         }
     }
+
     async atualizarConsulta(req, res) {
         try {
             const { body, params } = req
-            if (body.motivo || body.data_consulta || body.observacoes || body.medico_responsavel_id || body.paciente_id) {
-                await prismaClient.consulta.update({
-                    where: { id: Number(params.id) },
-                    data: {
-                        ...body
-                    },
-                })
-
-                const consultaAtualizado = await prismaClient.consulta.findUnique({
-                    where: {
-                        id: Number(params.id)
-                    }
-                })
-
-                res.status(201).json({
-                    message: "Usuário atualizado!",
-                    data: consultaAtualizado
-                })
-            } else {
-                res.status(404).send("Atributos enviados não condizem com o schema")
+            const bodyKeys = Object.keys(body)
+            for (const key of bodyKeys) {
+                if (key !== "motivo" &&
+                    key !== "data_consulta" &&
+                    key !== "observacoes" &&
+                    key !== "medico_responsavel_id" &&
+                    key !== "paciente_id"
+                ) return res.status(404).send("Colunas não existentes")
             }
+            await prismaClient.consulta.update({
+                where: { id: Number(params.id) },
+                data: {
+                    ...body
+                },
+            })
+            const consultaAtualizado = await prismaClient.consulta.findUnique({
+                where: {
+                    id: Number(params.id)
+                }
+            })
+
+            return res.status(201).json({
+                message: "Consulta atualizado!",
+                data: consultaAtualizado
+            })
+
         } catch (error) {
             if (error.code == "P2025") {
-                res.status(404).send("consulta não existe no banco")
+                res.status(404).send("Consulta não existe no banco")
             }
-            if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar consulta: Email já cadastrado!")
-            }
+
         }
     }
+
     async deletarConsulta(req, res) {
         const { params } = req
         try {
@@ -90,15 +99,15 @@ class ConsultaController {
                 },
             })
             res.status(200).json({
-                message: "consulta deletado!",
+                message: "Consulta deletado!",
                 data: consultaDeletado
             })
         } catch (error) {
             if (error.code == "P2025") {
-                res.status(404).send("consulta não existe no banco")
+                res.status(404).send("Consulta não existe no banco")
             }
         }
     }
 }
 
-export const consultaController = new ConsultaController();
+export const consultaController = new ConsultaController(0)
