@@ -4,9 +4,15 @@ import { prismaClient } from "../../../prisma/prisma.js";
 class ConsultaController {
     constructor() { }
 
-    async pegarTodasConsultas(_, res) {
+    async pegarTodasConsultas(req, res) {
+        const { page, limit } = req.params
         try {
-            const consultas = await prismaClient.consulta.findMany();
+            const consultas = await prismaClient.consulta.findMany(
+                {
+                    skip: (page-1)*limit,
+                    take: limit,
+                }
+            );
             return res.json(consultas)
         }
         catch (e) {
