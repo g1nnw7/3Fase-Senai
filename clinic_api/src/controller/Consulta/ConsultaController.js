@@ -7,11 +7,11 @@ class ConsultaController {
     async pegarTodasConsultas(req, res) {
         const { page, limit } = req.query
         const pageNumber = Number(page)
-        const limitNumber = Number(limit)
+        const limitNumber= Number(limit)
         try {
             const consultas = await prismaClient.consulta.findMany(
                 {
-                    skip: (pageNumber - 1)*limitNumber,
+                    skip: (pageNumber - 1) * limitNumber,
                     take: limitNumber,
                 }
             );
