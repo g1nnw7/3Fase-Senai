@@ -4,9 +4,17 @@ import { prismaClient } from '../../../prisma/prisma.js';
 class ExameController {
     constructor() { }
 
-    async pegarTodosExames(_, res) {
+    async pegarTodosExames(req, res) {
+        const {page, limit} = req.query
+        const pageNumber = Number(page)
+        const limitNumber = Number(limit)
         try {
-            const exames = await prismaClient.exame.findMany();
+            const exames = await prismaClient.exame.findMany(
+               {
+                skip: (pageNumber - 1)* limitNumber,
+                take: (limitNumber),
+               }
+            );
             return res.json(exames)
         }
         catch (e) {
