@@ -5,12 +5,14 @@ class ConsultaController {
     constructor() { }
 
     async pegarTodasConsultas(req, res) {
-        const { page, limit } = req.params
+        const { page, limit } = req.query
+        const pageNumber = Number(page)
+        const limitNumber = Number(limit)
         try {
             const consultas = await prismaClient.consulta.findMany(
                 {
-                    skip: (page-1)*limit,
-                    take: limit,
+                    skip: (pageNumber - 1)*limitNumber,
+                    take: limitNumber,
                 }
             );
             return res.json(consultas)
