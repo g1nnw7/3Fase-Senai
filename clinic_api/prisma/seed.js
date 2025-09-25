@@ -11,40 +11,629 @@ async function main() {
   //     },
   //   ],
   // });
-  await prisma.paciente.createMany({
-    data: [{
-      nome: "Alex",          
-      cpf: "888231421",        
-      telefone: 21421,     
-      email: "alex@gmail.com",      
-      data_nascimento:  new Date("1980-12-11"),
-      sexo: "Masculino",
-      responsavel: "" 
-    }]
-  })
 
   await prisma.exame.createMany({
     data: [{
-      tipo_exame: "Endoscopia",
-      resultado: "Bacteria",
-      data_exame: new Date("1980-12-11"),
-      link_arquivo: "discord.gg/link",
-      observacoes: "",
-      paciente_id: 1,
+
     }]
   })
 
 
-  await prisma.prontuario.createMany({
-    data: [{
-      descricao: "Dor",
-      data: new Date("1980-12-11"),
-      medico_responsavel_id: 1,
-      paciente_id: 1
-    }]
-  })
+  // await prisma.paciente.create({
+  //   data: {
+  //     nome: "João",
+  //     sexo: "Masculino",
+  //     data_nascimento: new Date("1980-12-11"),
+  //     cpf: "958.521.251.65",
+  //     telefone: 952556232,
+  //     email: "joao@email.com",
+  //     // Consulta: {
+  //     //   create: [
+  //     //     {
+  //     //       motivo: "Dor nas costas",
+  //     //       data_consulta: new Date("2023-08-25"),
+  //     //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //     //       medico_responsavel_id: 
+  //     //     }
+  //     //   ]
+  //     // },
+  //     // Exame: {
+  //     //   create: [
+  //     //     {
+  //     //       tipo: "Densiometro",
+  //     //       data_exame: new Date("2023-08-25"),
+  //     //       resultado: "deu ruim",
+  //     //       link_arquivo: "url.com.br/exame.pdf",
+  //     //       observacoes: ""
+  //     //     }
+  //     //   ]
+  //     // }
+  //   },
+  // });
 
 
+  // await prisma.consulta.createMany({
+  //   data: [
+  //     {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     },
+  //     {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     }, {
+  //       motivo: "Dor nas costas",
+  //       data_consulta: new Date("2023-08-25"),
+  //       observacoes: "Ibuprofeno 3 vezes ao dia",
+  //       medico_responsavel_id: 1,
+  //       paciente_id: 1
+  //     },
+  //   ]
+  // });
 }
 
 main()
