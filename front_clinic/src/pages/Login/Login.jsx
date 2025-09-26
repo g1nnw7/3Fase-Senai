@@ -1,4 +1,5 @@
 import logo from '../../assets/image/logo.png'
+import LoginForm from '../../components/LoginForm/LoginFrom'
 
 export default function Login() {
     return (
@@ -8,7 +9,7 @@ export default function Login() {
                     <img src={logo} alt="clinica médica" className='mb-6' />
                 </div>
                 <div className='flex w-full md:w-1/2 items-center justify-center p-8'>
-                    <h1>Login</h1>
+                    <LoginForm/>
                 </div>
             </div>
         </>
