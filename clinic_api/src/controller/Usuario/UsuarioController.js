@@ -27,6 +27,20 @@ export async function getUsuarioPorId(req, res) {
   }
 }
 
+// GET /usuarios/:email
+export async function getUsuarioPorEmail(req, res) {
+  try {
+    const usuario = await prismaClient.usuario.findUnique({
+      where: { email: String(req.params.email) },
+    });
+    if (!usuario) return res.status(404).send("Usuário não existe!");
+    return res.json(usuario);
+  } catch (e) {
+    console.error(" Erro em getUsuarioPorEmail:", e);
+    return res.status(500).json({ error: "Erro ao buscar usuário" });
+  }
+}
+
 // POST /usuarios
 export async function criarUsuario(req, res) {
   try {
