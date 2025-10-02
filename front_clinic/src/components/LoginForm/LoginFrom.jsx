@@ -10,11 +10,26 @@ const LoginForm = () => {
                         id="email"
                         value=""
                         required
-                        className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                        className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
+                        focus:ring-blue-500"/>
                 </div>
                 <div>
-                    
+                    <label htmlFor="password" className="block text-sm font-medium mb-1">Senha:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value=""
+                        required
+                        minLength={8}
+                        className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2
+                        focus:ring-blue-500"
+                        />
+
                 </div>
+                <button
+                type="submit"
+                className="w-full bg-cyan-700 text-white p-2 rounded-lg hover:bg-cyan-800
+               transition-colors">Entrar</button>
             </form>
         </div>
     )
