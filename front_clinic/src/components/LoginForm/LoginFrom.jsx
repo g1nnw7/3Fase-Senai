@@ -17,7 +17,9 @@ const LoginForm = () => {
             const res = await axios.get('http://localhost:3000/users', {
                 params: { email, password }
             })
-            console.log(res)
+            if(res.data.length === 0){
+                console.log("usuario não encontrado")
+            }
         }
         catch {
 
