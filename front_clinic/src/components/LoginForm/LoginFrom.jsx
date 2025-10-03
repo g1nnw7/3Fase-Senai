@@ -33,6 +33,7 @@ const LoginForm = () => {
                         type="email"
                         id="email"
                         value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
                         focus:ring-blue-500"/>
@@ -43,6 +44,7 @@ const LoginForm = () => {
                         type="password"
                         id="password"
                         value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
                         required
                         minLength={8}
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2
