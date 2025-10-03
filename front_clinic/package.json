@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "npx json-server ./src/db.json"
+    "server": "npx json-server ./src/services/db.json"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
