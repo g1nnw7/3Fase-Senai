@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
-import { env } from "../env.js";
+import { env } from "../../env.js";
 
 export function signAccessToken(payload) {
+    console.log(env)
     return jwt.sign(
         payload, env.accessSecret,
         {

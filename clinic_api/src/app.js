@@ -8,6 +8,8 @@ import { pacientesRouter } from "./routes/pacientes.js";
 import { consultasRouter } from "./routes/consulta.js";
 import { prontuarioRouter } from "./routes/prontuario.js";
 import { exameRouter } from "./routes/exame.js";
+import authRouter from "./routes/authRoutes.js";
+import { auth } from "./middleware/auth.js";
 
 const app = express();
 
@@ -21,6 +23,10 @@ app.get("/ping", (req, res) => {
 });
 
 // Rotas
+app.use('/auth', authRouter)
+
+app.use(auth);
+// rotas privadas
 app.use(usuarioRouter);
 app.use(exameRouter);
 app.use(pacientesRouter);

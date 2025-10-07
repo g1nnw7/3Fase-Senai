@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
-import { prismaClient } from "../../prisma/prisma.ts";
+import { prismaClient } from "../../../prisma/prisma.js";
 import {
     signAccessToken,
     signRefreshToken,
     verifyRefresh,
-} from "../utils/jwt.ts";
+} from "../../utils/jwt.js";
 
 
 class AuthController {
@@ -15,7 +15,7 @@ class AuthController {
         res
     ) {
         try {
-            const { email, senha, nome } = req.body;
+            const { email, senha, nome, cargo } = req.body;
             // Validação básica
             if (!email || !senha) {
                 return res.status(400).json({ error: "Email e senha são obrigatórios" });
@@ -24,6 +24,7 @@ class AuthController {
             const existingUser = await prismaClient.usuario.findUnique({
                 where: { email },
             });
+            console.log(existingUser)
             if (existingUser) {
                 return res.status(409).json({ error: "Usuário já existe" });
             }
@@ -37,7 +38,6 @@ class AuthController {
                     id: true,
                     email: true,
                     nome: true,
-                    cargo: true,
                 },
             });
             return res.status(201).json(user);
@@ -76,7 +76,7 @@ class AuthController {
                 data: {
                     token: refreshToken,
                     type: "refresh",
-                    userId: user.id,
+                    usuarioId: user.id,
                     expiresAt,
                 },
             });
@@ -86,7 +86,7 @@ class AuthController {
                 user: {
                     id: user.id,
                     email: user.email,
-                    name: user.name,
+                    nome: user.nome,
                 },
             });
         } catch (error) {
