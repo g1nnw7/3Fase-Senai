@@ -30,9 +30,11 @@ class ProntuarioController {
     async pegarProntuarioPorID(req, res) {
         try {
             // const { params } = req;
+            const token = getToken(req.headers.authorization);
             const prontuario = await prismaClient.prontuario.findUnique({
                 where: {
-                    id: Number(req.params.id)
+                    id: Number(req.params.id),
+                    medico_responsavel_id: token.userId
                 }
             });
             if (!prontuario) {
