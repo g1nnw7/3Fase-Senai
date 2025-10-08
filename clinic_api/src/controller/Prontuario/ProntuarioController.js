@@ -14,7 +14,11 @@ class ProntuarioController {
                     medico_responsavel_id: token.userId
                 },
                 include:{
-                    paciente:true
+                    paciente:{
+                        select:{
+                            nome:true
+                        }
+                    }
                 }
             });
             return res.json(prontuarios)
