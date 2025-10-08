@@ -96,34 +96,33 @@ class AuthController {
         return res;
     };
 
-    // desabilitado pq o professor vai fazer junto
-    // async refresh(
-    //     req,
-    //     res
-    // ) {
-    //     const { refreshToken } = req.body;
-    //     const storedRefreshToken = await prismaClient.token.findFirst({
-    //         where: { token: refreshToken },
-    //     });
-    //     if (
-    //         !storedRefreshToken ||
-    //         storedRefreshToken.revoked ||
-    //         storedRefreshToken.expiresAt < new Date()
-    //     )
-    //         return res.status(401).json({ error: "invalid refresh token" });
+    async refresh(
+        req,
+        res
+    ) {
+        const { refreshToken } = req.body;
+        const storedRefreshToken = await prismaClient.token.findFirst({
+            where: { token: refreshToken },
+        });
+        if (
+            !storedRefreshToken ||
+            storedRefreshToken.revoked ||
+            storedRefreshToken.expiresAt < new Date()
+        )
+            return res.status(401).json({ error: "invalid refresh token" });
 
-    //     try {
-    //         const payload = verifyRefresh(refreshToken);
-    //         const accessToken = signAccessToken({
-    //             userId: payload.id,
-    //             email: payload.email,
-    //             name: payload.name,
-    //         });
-    //         return res.json({ accessToken });
-    //     } catch {
-    //         return res.status(401).json({ error: "invalid refresh token" });
-    //     }
-    // };
+        try {
+            const payload = verifyRefresh(refreshToken);
+            const accessToken = signAccessToken({
+                userId: payload.userId,
+                email: payload.email,
+                nome: payload.nome,
+            });
+            return res.json({ accessToken });
+        } catch {
+            return res.status(401).json({ error: "invalid refresh token" });
+        }
+    };
 
     async logout(
         req,
