@@ -1,5 +1,4 @@
 // Controller
-
 import { prismaClient } from "../../../prisma/prisma.js";
 import { getToken } from "../../utils/jwt.js";
 
@@ -8,19 +7,18 @@ class ProntuarioController {
 
     async pegarTodosProntuario(req, res) {
         try {
-            const token = getToken(req.headers.authorization);
-
+            const { query } = req
             const prontuarios = await prismaClient.prontuario.findMany({
-                where: {
-                    medico_responsavel_id: token.userId
-                },
-                include:{
-                    paciente:{
-                        select:{
-                            nome:true
-                        }
+                where:{
+                    data:{
+                        lte: query.dataFinal ?  new Date(query.dataFinal) : undefined,
+                        gte: query.dataInicio ? new Date(query.dataInicio) : undefined
+                    },
+                    paciente: {
+                        nome: query.paciente
                     }
                 }
+
             });
             return res.json(prontuarios);
         } catch (error) {
@@ -29,14 +27,12 @@ class ProntuarioController {
     }
     async pegarProntuarioPorID(req, res) {
         try {
-            // const { params } = req;
-            const token = getToken(req.headers.authorization);
             const prontuario = await prismaClient.prontuario.findUnique({
                 where: {
                     id: Number(req.params.id),
-                    medico_responsavel_id: token.userId
                 }
             });
+
             if (!prontuario) {
                 res.status(404).send("Erro ao procurar o prontuario com o id informado")
             }
@@ -48,17 +44,19 @@ class ProntuarioController {
     async criarProntuario(req, res) {
         try {
             const { body } = req
+            const token = getToken(req.headers.authorization);
+
             const bodyKeys = Object.keys(body)
             for (const key of bodyKeys) {
                 if (key !== "descricao" &&
                     key !== "data" &&
-                    key !== "medico_responsavel_id" &&
                     key !== "paciente_id"
                 ) return res.status(404).send("Colunas não existentes")
             }
             const prontuario = await prismaClient.prontuario.create({
                 data: {
                     ...body,
+                    medico_responsavel_id: token.userId,
                     data: new Date(body.data) // corrigir esse cara no put quando nao se manda ele... TO-DO
                 },
             })

@@ -13,8 +13,8 @@ import {
 export const usuarioRouter = Router();
 
 usuarioRouter.get("/usuarios", getTodosOsUsuarios);
+usuarioRouter.get("/usuarios/byemail/", getUsuarioPorEmail);
 usuarioRouter.get("/usuarios/:id", getUsuarioPorId);
-usuarioRouter.get("/usuarios/:email", getUsuarioPorEmail);
 usuarioRouter.post("/usuarios", criarUsuario);
 usuarioRouter.put("/usuarios/:id", atualizarUsuario);
 usuarioRouter.delete("/usuarios/:id", deletarUsuario);
