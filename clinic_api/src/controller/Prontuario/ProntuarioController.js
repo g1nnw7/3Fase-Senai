@@ -12,6 +12,9 @@ class ProntuarioController {
             const prontuarios = await prismaClient.prontuario.findMany({
                 where:{
                     medico_responsavel_id: token.userId
+                },
+                include:{
+                    paciente:true
                 }
             });
             return res.json(prontuarios)
