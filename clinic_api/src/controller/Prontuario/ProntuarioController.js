@@ -1,16 +1,17 @@
 // Controller
 
 import { prismaClient } from "../../../prisma/prisma.js";
-import { getToken, verifyAccess } from "../../utils/jwt.js";
+import { getToken } from "../../utils/jwt.js";
 
 class ProntuarioController {
     constructor() { }
 
     async pegarTodosProntuario(req, res) {
         try {
-            const token = getToken(req.headers.authorization)
+            const token = getToken(req.headers.authorization);
+
             const prontuarios = await prismaClient.prontuario.findMany({
-                where:{
+                where: {
                     medico_responsavel_id: token.userId
                 },
                 include:{
@@ -21,7 +22,7 @@ class ProntuarioController {
                     }
                 }
             });
-            return res.json(prontuarios)
+            return res.json(prontuarios);
         } catch (error) {
             console.log(error)
         }
