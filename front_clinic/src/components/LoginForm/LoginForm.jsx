@@ -38,7 +38,7 @@ const LoginForm = () => {
                 autoClose: 3000,
                 hideProgressBar: true
             })
-
+            setTimeout(()=>navigate('/dashboard'), 2000)
         }
         catch (error) {
             console.error('Erro ao verificar o usuário')
