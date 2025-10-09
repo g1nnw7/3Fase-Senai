@@ -14,12 +14,17 @@ import 'react-toastify/dist/ReactToastify.css'
 import './index.css'
 import Login from './pages/Login/Login'
 import { AuthProvider } from './contexts/AuthContext'
+import Dashboard from './pages/DashBoard/Dashboard'
 // import App from './App.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />
   }
 ])
 
