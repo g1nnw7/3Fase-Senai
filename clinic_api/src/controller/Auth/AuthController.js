@@ -52,7 +52,7 @@ class AuthController {
         try {
             const { email, senha } = req.body;
             const user = await prismaClient.usuario.findUnique({ where: { email } }); // Verificar se usuário existe e senha está correta
-            if (!user || !(await bcrypt.compare(senha, user.senha))) {
+            if (!user || !(await bcrypt.compare(senha, user.senha))) { //é oq faz o cara logar sem o hashed
                 return res.status(401).json({ error: "Credenciais inválidas" });
             }
             // Gerar access token (curta duração)
