@@ -9,12 +9,26 @@ class ConsultaController {
         const pageNumber = Number(page)
         const limitNumber= Number(limit)
         try {
-            const consultas = await prismaClient.consulta.findMany(
-                {
-                    skip: (pageNumber - 1) * limitNumber,
-                    take: limitNumber,
+            const { query } = req
+            const usuario = await prismaClient.usuario.findFirst({
+                where:{
+                    nome: query.medico
                 }
-            );
+            })
+            const consultas = await prismaClient.consulta.findMany({
+                skip: (pageNumber - 1) * limitNumber,
+                take: limitNumber,
+                where:{
+                    data:{
+                        lte: query.dataFinal ?  new Date(query.dataFinal) : undefined,
+                        gte: query.dataInicio ? new Date(query.dataInicio) : undefined
+                    },
+                    medico_responsavel_id: usuario.id,
+                    paciente:{
+                        nome: query.paciente
+                    }
+                }
+                });
             return res.json(consultas)
         }
         catch (e) {
