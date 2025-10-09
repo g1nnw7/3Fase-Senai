@@ -83,12 +83,13 @@ const LoginForm = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-cyan-700 text-white p-2 rounded-lg hover:bg-cyan-800 transition-colors">Entrar</button>
+                    className="w-full bg-cyan-700 text-white p-2 rounded-lg hover:bg-cyan-800 
+                    transition-color cursor-pointer">Entrar</button>
             </form>
 
             <div className="flex justify-between mt-4 text-sm">
-                <button>Esqueceu sua senha?</button>
-                <button>Criar conta</button>
+                <button className="cursor-pointer">Esqueceu sua senha?</button>
+                <button className="cursor-pointer">Criar conta</button>
             </div>
 
 
