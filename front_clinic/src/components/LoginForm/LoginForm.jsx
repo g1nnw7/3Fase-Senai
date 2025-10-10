@@ -91,7 +91,7 @@ const LoginForm = () => {
                 <button className="cursor-pointer" onClick={()=>setIsModalOpen(true)}>Criar conta</button>
             </div>
             <Modal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
-                
+            
             </Modal>
         </div>
     )
