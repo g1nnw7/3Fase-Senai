@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router"
+import Modal from "../Modal/Modal"
 
 const LoginForm = () => {
     const [email, setEmail] = useState("")
@@ -91,8 +92,9 @@ const LoginForm = () => {
                 <button className="cursor-pointer">Esqueceu sua senha?</button>
                 <button className="cursor-pointer">Criar conta</button>
             </div>
-
-
+            <Modal>
+                
+            </Modal>
         </div>
     )
 }
