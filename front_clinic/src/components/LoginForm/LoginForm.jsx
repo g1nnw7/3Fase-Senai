@@ -10,14 +10,13 @@ const LoginForm = () => {
     const [password, setPassword] = useState("")
     //contexto
     const { login } = useAuth()
+    //rotas com react route
     const navigate = useNavigate()
-
-
+    //modal
+    const [isModalOpen, setIsModalOpen] = useState(false)
     //função de validação do login
-
     const handleLogin = async (e) => {
         e.preventDefault()
-
         try {
             const response = await axios.get('http://localhost:3000/users', {
                 params: { email, password }
@@ -39,7 +38,7 @@ const LoginForm = () => {
                 autoClose: 3000,
                 hideProgressBar: true
             })
-            setTimeout(()=>navigate('/dashboard'), 2000)
+            setTimeout(() => navigate('/dashboard'), 2000)
         }
         catch (error) {
             console.error('Erro ao verificar o usuário')
@@ -80,7 +79,6 @@ const LoginForm = () => {
                         minLength={8}
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-
                 </div>
                 <button
                     type="submit"
@@ -90,9 +88,9 @@ const LoginForm = () => {
 
             <div className="flex justify-between mt-4 text-sm">
                 <button className="cursor-pointer">Esqueceu sua senha?</button>
-                <button className="cursor-pointer">Criar conta</button>
+                <button className="cursor-pointer" onClick={()=>setIsModalOpen(true)}>Criar conta</button>
             </div>
-            <Modal>
+            <Modal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
                 
             </Modal>
         </div>
