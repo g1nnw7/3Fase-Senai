@@ -6,7 +6,15 @@ const RegisterUser = () => {
         <h2 className='text-2xl font-bold mb-6 text-center'>Criar Usuário</h2>
         <form className='space-y-4'>
             <div>
-                <label htmlFor="email" className=''></label>
+                <label htmlFor="email" className='block text-sm font-medium mb-1'>Email:</label>
+                <input 
+                type="email" 
+                id='email'
+                value=''
+                required
+                className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
+                focus:ring-blue-500'
+                />
             </div>
         </form>
     </div>

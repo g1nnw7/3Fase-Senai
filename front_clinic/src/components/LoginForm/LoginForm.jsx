@@ -4,6 +4,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router"
 import Modal from "../Modal/Modal"
+import RegisterUser from "../RegisterUser/RegisterUser"
 
 const LoginForm = () => {
     const [email, setEmail] = useState("")
@@ -91,7 +92,7 @@ const LoginForm = () => {
                 <button className="cursor-pointer" onClick={()=>setIsModalOpen(true)}>Criar conta</button>
             </div>
             <Modal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
-            
+            <RegisterUser />
             </Modal>
         </div>
     )
