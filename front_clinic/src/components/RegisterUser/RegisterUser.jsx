@@ -94,7 +94,9 @@ const RegisterUser = () => {
             className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
                 focus:ring-blue-500'
           />
-          {/* validação aqui */}
+          {!isPasswordMatch &&(
+            <p className='text-red-600 text-sm mt-1'>As senhas não correspondem</p>
+          )}
         </div>
         <div className='flex justify-center'>
           <button

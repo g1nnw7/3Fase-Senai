@@ -19,6 +19,11 @@
       "id": "0110",
       "email": "andre@gmail.com",
       "password": "12345678"
+    },
+    {
+      "id": "68b9",
+      "email": "luciano@gmail.com",
+      "password": "1234567890"
     }
   ]
 }
