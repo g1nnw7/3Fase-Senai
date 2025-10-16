@@ -1,14 +1,24 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "email": "joao@gmail.com",
-            "password": "123456789"
-        },
-        {
-            "id": 2,
-            "email": "maria@gmail.com",
-            "password": "123456789"
-        }
-    ]
+  "users": [
+    {
+      "id": "1",
+      "email": "joao@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "2",
+      "email": "maria@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "5601",
+      "email": "mathias@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "0110",
+      "email": "andre@gmail.com",
+      "password": "12345678"
+    }
+  ]
 }
