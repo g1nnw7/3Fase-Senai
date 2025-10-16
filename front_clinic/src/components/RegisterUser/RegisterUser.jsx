@@ -6,19 +6,19 @@ const RegisterUser = () => {
         <h2 className='text-2xl font-bold mb-6 text-center'>Criar Usuário</h2>
         <form className='space-y-4'>
             <div>
-                <label htmlFor="email" className='block text-sm font-medium mb-1'>Email:</label>
+                <label htmlFor="emailRegisterUser" className='block text-sm font-medium mb-1'>Email:</label>
                 <input 
                 type="email" 
-                id='email'
+                id='emailRegisterUser'
                 value=''
                 required
                 className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
                 focus:ring-blue-500'
                 />
-                <label htmlFor="password" className='block text-sm font-medium mb-1'>Senha</label>
+                <label htmlFor="passwordRegisterUser" className='block text-sm font-medium mb-1'>Senha</label>
                 <input 
                 type="password" 
-                id='password'
+                id='passwordRegisterUser'
                 value=''
                 required
                 minLength={8}
@@ -39,7 +39,7 @@ const RegisterUser = () => {
                 />
                 {/* validação aqui */}
             </div>
-            <div>
+            <div className='flex justify-center'>
               <button
               type='submit'
               disabled=""
