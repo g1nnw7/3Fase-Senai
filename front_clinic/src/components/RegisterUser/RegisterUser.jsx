@@ -40,8 +40,12 @@ const RegisterUser = () => {
                 {/* validação aqui */}
             </div>
             <div>
-              <button>
-                
+              <button
+              type='submit'
+              disabled=""
+              className='border rounded-2xl p-2 cursor-pointer hover:bg-gray-200'
+              >
+                Criar Usuário
               </button>
             </div>
         </form>
