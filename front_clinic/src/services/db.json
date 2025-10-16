@@ -24,6 +24,16 @@
       "id": "68b9",
       "email": "luciano@gmail.com",
       "password": "1234567890"
+    },
+    {
+      "id": "e77a",
+      "email": "andrei@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "4dcf",
+      "email": "japao@gmail.com",
+      "password": "12345678"
     }
   ]
 }

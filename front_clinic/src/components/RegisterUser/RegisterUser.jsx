@@ -101,10 +101,10 @@ const RegisterUser = () => {
         <div className='flex justify-center'>
           <button
             type='submit'
-            disabled=""
-            className='border rounded-2xl p-2 cursor-pointer hover:bg-gray-200'
+            disabled={isSaving}
+            className={`w-full p-2 rounded-lg text-white ${isSaving ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} cursor-pointer transition-colors`}
           >
-            Criar Usuário
+            {isSaving ? 'Salvando' : 'Criar Usuário'}
           </button>
         </div>
       </form>
