@@ -15,6 +15,34 @@ const RegisterUser = () => {
                 className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
                 focus:ring-blue-500'
                 />
+                <label htmlFor="password" className='block text-sm font-medium mb-1'>Senha</label>
+                <input 
+                type="password" 
+                id='password'
+                value=''
+                required
+                minLength={8}
+                className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
+                focus:ring-blue-500'
+                />
+            </div>
+            <div>
+            <label htmlFor="confirmPassword" className='block text-sm font-medium mb-1'>Confirmar Senha</label>
+                <input 
+                type="password" 
+                id='confirmPassword'
+                value=''
+                required
+                minLength={8}
+                className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
+                focus:ring-blue-500'
+                />
+                {/* validação aqui */}
+            </div>
+            <div>
+              <button>
+                
+              </button>
             </div>
         </form>
     </div>
