@@ -33,5 +33,5 @@ app.use(pacientesRouter);
 app.use(prontuarioRouter);
 app.use(consultasRouter);
 
-const port = 3000;
+const port = 4000;
 app.listen(port, () => console.log(`Api rodando na porta ${port}`));
