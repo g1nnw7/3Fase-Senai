@@ -53,14 +53,14 @@ const RegisterUser = () => {
       toast.success("Usuário criado com sucesso!", {
         autoClose: 3000,
         hideProgressBar: true
-    })
+      })
     } catch (error) {
       console.error("Erro ao criar o usuário", error)
       toast.error("Erro ao criar usuário!", {
         autoClose: 3000,
         hideProgressBar: true,
-    })
-    setIsSaving(false)
+      })
+      setIsSaving(false)
     }
   }
 
@@ -90,15 +90,19 @@ const RegisterUser = () => {
                 focus:ring-blue-500'
           />
           <label htmlFor="cargoUsuario" className='block text-sm font-medium mb-1'>Cargo:</label>
-          <input
-            type="text"
+          <select
             id='cargoUsuario'
             value={cargo}
             onChange={handleCargoChange}
-            required
             className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
-                focus:ring-blue-500'
-          />
+          focus:ring-blue-500 '>
+            <option value="">Selecione uma opção</option>
+            <option value="">Médico</option>
+            <option value="">Dentista</option>
+            <option value="">Aleatório</option>
+          </select>
+          
+
           <label htmlFor="passwordRegisterUser" className='block text-sm font-medium mb-1'>Senha</label>
           <input
             type="password"
@@ -123,7 +127,7 @@ const RegisterUser = () => {
             className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
                 focus:ring-blue-500'
           />
-          {!isPasswordMatch &&(
+          {!isPasswordMatch && (
             <p className='text-red-600 text-sm mt-1'>As senhas não correspondem</p>
           )}
         </div>
