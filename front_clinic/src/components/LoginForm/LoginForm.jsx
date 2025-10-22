@@ -25,9 +25,11 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.get('http://localhost:3000/users', {
-                params: { email, password }
-            })
+            const data ={
+            email: email,
+            senha: password
+            }
+            const response = await axios.post('http://localhost:4000/auth/login', data)
 
             // console.log(response)
 

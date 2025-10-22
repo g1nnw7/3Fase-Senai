@@ -7,6 +7,8 @@ const RegisterUser = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [name, setName] = useState('')
+  const [cargo, setCargo] = useState('')
   //verificador de correspondência de senha
   const [isPasswordMatch, setIsPasswordMatch] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
@@ -14,6 +16,8 @@ const RegisterUser = () => {
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value)
+  const handleNameChange = (e) => setName(e.target.value)
+  const handleCargoChange = (e) => setCargo(e.target.value)
 
   //validação dos campos de senha
   const isPaswordValid = () => password.length >= 8 && password === confirmPassword
@@ -23,6 +27,8 @@ const RegisterUser = () => {
   const resetForm = () => {
     setEmail('')
     setPassword('')
+    setName('')
+    setCargo('')
     setConfirmPassword('')
     setIsPasswordMatch(true)
   }
@@ -35,10 +41,13 @@ const RegisterUser = () => {
     }
     setIsSaving(true)
     try {
-      await axios.post('http://localhost:3000/users', {
-        email,
-        password
-      })
+      const data = {
+        email: email,
+        nome: name,
+        cargo: cargo,
+        senha: password
+      }
+      await axios.post('http://localhost:4000/auth/register', data)
       setIsSaving(false)
       resetForm()
       toast.success("Usuário criado com sucesso!", {
@@ -66,6 +75,26 @@ const RegisterUser = () => {
             id='emailRegisterUser'
             value={email}
             onChange={handleEmailChange}
+            required
+            className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
+                focus:ring-blue-500'
+          />
+          <label htmlFor="nomeUsuario" className='block text-sm font-medium mb-1'>Nome:</label>
+          <input
+            type="text"
+            id='nomeUsuario'
+            value={name}
+            onChange={handleNameChange}
+            required
+            className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
+                focus:ring-blue-500'
+          />
+          <label htmlFor="cargoUsuario" className='block text-sm font-medium mb-1'>Cargo:</label>
+          <input
+            type="text"
+            id='cargoUsuario'
+            value={cargo}
+            onChange={handleCargoChange}
             required
             className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
                 focus:ring-blue-500'
