@@ -90,17 +90,15 @@ const RegisterUser = () => {
                 focus:ring-blue-500'
           />
           <label htmlFor="cargoUsuario" className='block text-sm font-medium mb-1'>Cargo:</label>
-          <select
+                    <input
+            type="text"
             id='cargoUsuario'
             value={cargo}
             onChange={handleCargoChange}
+            required
             className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 
-          focus:ring-blue-500 '>
-            <option value="">Selecione uma opção</option>
-            <option value="">Médico</option>
-            <option value="">Dentista</option>
-            <option value="">Aleatório</option>
-          </select>
+                focus:ring-blue-500'
+          />
           
 
           <label htmlFor="passwordRegisterUser" className='block text-sm font-medium mb-1'>Senha</label>
