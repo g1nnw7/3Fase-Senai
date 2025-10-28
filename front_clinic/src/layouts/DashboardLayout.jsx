@@ -1,10 +1,13 @@
 import { Outlet } from "react-router"
 import { useAuth } from "../contexts/AuthContext"
+import SideMenu from "../components/SideMenu/SideMenu"
+
+
 const DashboardLayout = () => {
     const { user, logout } = useAuth()
     return (
         <div className="flex min-h-screen bg-gray-100">
-            <div>SideMenu</div>
+            <SideMenu />
 
             {/* Conteúdo principal */}
             <main className="flex-1 flex flex-col">
@@ -15,10 +18,9 @@ const DashboardLayout = () => {
                             <span className="text-gray-700">Bem vindo, {user.email}</span>
                             <button
                                 onClick={logout}
-                                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 
-                                transition cursor-pointer">
-                                    Sair
-                                </button>
+                                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer">
+                                Sair
+                            </button>
                         </div>
                     )}
                 </header>

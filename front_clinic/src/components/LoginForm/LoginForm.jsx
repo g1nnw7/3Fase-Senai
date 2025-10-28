@@ -51,7 +51,7 @@ const LoginForm = () => {
         }
         catch (error) {
             console.error('Erro ao verificar o usuário')
-            toast.error('Erro ao conectar com o servidor', {
+            toast.error('Usuário não encontrado. Verifique o email e senha', {
                 autoClose: 1000,
                 hideProgressBar: true
             })
