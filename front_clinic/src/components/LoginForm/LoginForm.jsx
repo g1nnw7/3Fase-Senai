@@ -13,23 +13,26 @@ const LoginForm = () => {
     const { login, user } = useAuth()
     //rotas com react route
     const navigate = useNavigate()
-    //modal
+    // modal
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    useEffect(()=>{
+
+    useEffect(() => {
         if (user) {
             navigate('/dashboard')
         }
-    }, [user,navigate])
+    }, [user, navigate])
+
+
+    //função de validação do login
 
     const handleLogin = async (e) => {
         e.preventDefault()
+
         try {
-            const data ={
-            email: email,
-            senha: password
-            }
-            const response = await axios.post('http://localhost:4000/auth/login', data)
+            const response = await axios.get('http://localhost:3000/users', {
+                params: { email, password }
+            })
 
             // console.log(response)
 
@@ -47,14 +50,17 @@ const LoginForm = () => {
                 autoClose: 3000,
                 hideProgressBar: true
             })
+
             setTimeout(() => navigate('/dashboard'), 2000)
+
         }
         catch (error) {
             console.error('Erro ao verificar o usuário')
-            toast.error('Usuário não encontrado. Verifique o email e senha', {
+            toast.error('Erro ao conectar com o servidor', {
                 autoClose: 1000,
                 hideProgressBar: true
             })
+
         }
     }
 
@@ -88,21 +94,23 @@ const LoginForm = () => {
                         minLength={8}
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-cyan-700 text-white p-2 rounded-lg hover:bg-cyan-800 
-                    transition-color cursor-pointer">Entrar</button>
+                    className="w-full bg-cyan-700 text-white p-2 rounded-lg hover:bg-cyan-800 transition-colors cursor-pointer">Entrar</button>
             </form>
 
             <div className="flex justify-between mt-4 text-sm">
                 <button className="cursor-pointer">Esqueceu sua senha?</button>
-                <button className="cursor-pointer" onClick={()=>setIsModalOpen(true)}>Criar conta</button>
+                <button className="cursor-pointer" onClick={() => setIsModalOpen(true)}>Criar conta</button>
             </div>
-            <Modal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
-            <RegisterUser />
+
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <RegisterUser />
             </Modal>
         </div>
+
     )
 }
 

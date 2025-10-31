@@ -1,4 +1,4 @@
-import {verifyAccess} from '../utils/jwt.js'
+import { verifyAccess } from "../utils/jwt.ts";
 export function auth(req, res, next) {
     const hdr = req.headers.authorization;
     if (!hdr?.startsWith("Bearer "))
