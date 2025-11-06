@@ -7,13 +7,11 @@ const RegisterUser = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [cargo, setCargo] = useState('')
     // verificador de correspondência de senha
     const [isPasswordMatch, setIsPasswordMatch] = useState(true)
     const [isSaving, setIsSaving] = useState(false)
     //funções de alteração de estado
     const handleEmailChange = (e) => setEmail(e.target.value)
-    const handleCargoChange = (e) => setCargo(e.target.value)
     const handlePasswordChange = (e) => setPassword(e.target.value)
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value)
 
@@ -24,7 +22,6 @@ const RegisterUser = () => {
 
     const resetForm = () => {
         setEmail('')
-        setCargo('')
         setPassword('')
         setConfirmPassword('')
         setIsPasswordMatch(true)
@@ -72,17 +69,6 @@ const RegisterUser = () => {
                         id='emailRegisterUser'
                         value={email}
                         onChange={handleEmailChange}
-                        required
-                        className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    />
-                </div>
-                <div>
-                    <label htmlFor='cargoRegisterUser' className='block text-sm font-medium mb-1'>Cargo</label>
-                    <input
-                        type='text'
-                        id='cargoRegisterUser'
-                        value={cargo}
-                        onChange={handleCargoChange}
                         required
                         className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
