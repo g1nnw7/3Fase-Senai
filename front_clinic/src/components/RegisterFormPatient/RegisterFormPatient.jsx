@@ -192,7 +192,8 @@ const RegisterFormPatient = () => {
         {/* RG */}
         <div>
           <label className="block text-sm font-medium mb-1">RG</label>
-          <input
+          <IMaskInput
+            mask="00000000-0"
             type="text"
             name="rg"
             value={formData.rg}
@@ -427,7 +428,7 @@ const RegisterFormPatient = () => {
           />
         </div>
 
-        
+
       </div>
 
       {/* Botão de envio */}

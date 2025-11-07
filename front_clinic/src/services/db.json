@@ -87,6 +87,34 @@
         "neighborhood": "centro",
         "reference": "próximo da UPA"
       }
+    },
+    {
+      "id": "0c40",
+      "fullName": "Mathias",
+      "gender": "masculino",
+      "birthdate": "2008-02-12",
+      "cpf": "999.999.999-99",
+      "rg": "12345678",
+      "maritalStatus": "solteiro(a)",
+      "phone": "(12) 34567-8990",
+      "email": "mathias@gmail.com",
+      "birthplace": "Brasil",
+      "emergencyContact": "(54) 67898-0912",
+      "allergies": "Composto B",
+      "specialCare": "Nenhum",
+      "healthInsurance": "Geap",
+      "insuranceNumber": "213456574658946",
+      "insuranceValidity": "2050-02-20",
+      "address": {
+        "cep": "88032-530",
+        "city": "Florianópolis",
+        "state": "SC",
+        "street": "Rua do Louro",
+        "number": "244",
+        "complement": "",
+        "neighborhood": "Monte Verde",
+        "reference": "Casa Laranja"
+      }
     }
   ],
   "consults": [

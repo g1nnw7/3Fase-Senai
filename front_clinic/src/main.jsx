@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'prontuarios', element: <MedicalRecordList/> },
       { path: 'pacientes', element: <PatientsList/>},
-      { path: 'consultas', element: <RegisterFormPatient/>},
+      { path: 'cadastroPacientes', element: <RegisterFormPatient/>},
     ]
   }
 ])
