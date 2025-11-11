@@ -1,3 +1,5 @@
+// Path: src/controller/Auth/AuthController.js
+
 import bcrypt from "bcrypt";
 import { prismaClient } from "../../../prisma/prisma.js";
 import {
